@@ -105,7 +105,7 @@ function write()
 	var y = 1;
 	var offset = 0;
 	var worldHeight = BH.height;
-	var distance = worldHeight - 3;
+	var distance = worldHeight - 4;
 	var id = 1;
 	var xprev = 1;
 	var tempo = 60000000 / 120;
