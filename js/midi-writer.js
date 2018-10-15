@@ -49,13 +49,7 @@ function parseFile(file) {
 	reader.readAsDataURL(file);
 }
 
-var percussion = [
-	0, 13, 3, 2, 7, 2, 12, 6, 13, 14,
-	11, 10, 8, 10, 17, 17, 19, 9, 18,
-	19, 16, 1, 18, 10, 11, 10, 10, 11,
-	10, 11, 19, 19, 9, 9, 10, 10, 10,
-	10, 19, 19, 19, 19, 19, 6, 17, 17, 17, 17
-];
+var percussion = [ 0, 1, 3, 2, 7, 2, 13, 4, 12, 5, 12, 14, 11, 11, 7, 10, 17, 16, 18, 6, 7, 19, 16, 15, 18 ];
 
 var guitar = [ 43, 44, 45, 46, 47, 48, 38, 39, 40, 41, 42, 32, 33, 34, 35, 36, 27, 28, 29, 30, 21, 22, 23, 24, 25, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 ];
 
@@ -108,10 +102,10 @@ function write()
 	oldTime = 0;
 	isFinished = false;
 	var x = 1;
-	var y = 2;
+	var y = 1;
 	var offset = 0;
 	var worldHeight = BH.height;
-	var distance = worldHeight - 6;
+	var distance = worldHeight - 3;
 	var id = 1;
 	var xprev = 1;
 	var tempo = 60000000 / 120;
@@ -150,7 +144,7 @@ function write()
 				}
 
 				x = Math.floor(offset / distance + 2);
-				y = Math.floor(offset % distance + 3);
+				y = Math.floor(offset % distance + 2);
 				if (x >= BH.width - 2) {
 					x = xprev; 
 					break;
@@ -158,9 +152,14 @@ function write()
 
 				if (chans[e.channel]) {
 					if (e.channel == 9) {
-						if (note >= 35 && note <= 81) {
-							BH.place(0, x, y, 83, percussion [note - 35]);
-							break;
+						if (note >= 35 && note <= 59) {
+							BH.place(0, x, y, 83, percussion [note - 35])
+						}
+						else if (note >= 69 && note <= 70) {
+							BH.place(0, x, y, 83, 9)
+						}
+						else if (note <= 19) {
+							BH.place(0, x, y, 83, note)
 						}
 					} 
 					else {
@@ -182,7 +181,7 @@ function write()
 			for (var i = xprev; i < x; ++i) {
 				//Add in portals to the slack space
 				BH.place(0, i, 2, 242, 1, id, id - 1);
-				BH.place(0, i, worldHeight - 3, 242, 1, id + 1, id + 2);
+				BH.place(0, i, worldHeight - 2, 242, 1, id + 1, id + 2);
 				id += 2;
 			}
 		}
