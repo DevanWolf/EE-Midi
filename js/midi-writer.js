@@ -180,7 +180,7 @@ function write()
 		if (x > xprev) {
 			for (var i = xprev; i < x; ++i) {
 				//Add in portals to the slack space
-				BH.place(0, i, 2, 242, 1, id, id - 1);
+				BH.place(0, i, 1, 242, 1, id, id - 1);
 				BH.place(0, i, worldHeight - 2, 242, 1, id + 1, id + 2);
 				id += 2;
 			}
@@ -189,8 +189,8 @@ function write()
 	}
 
 	isFinished = true;
-	BH.place(0, x, 2, 242, 1, id, id - 1);
-	BH.place(0, x, worldHeight - 3, 242, 1, id + 1, 3);
+	BH.place(0, x, 1, 242, 1, id, id - 1);
+	BH.place(0, x, worldHeight - 2, 242, 1, id + 1, 3);
 
 	BH.onAllPlaced(function() {
 		$("#write-btn").val("Write");
